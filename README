@@ -1,0 +1,81 @@
+
+      Metode numerice: Tema 1
+
+
+   Ce este?
+   --------
+
+       Fisierele reprezinta implementarea in octave 4.0.0 a primei teme de 
+   Metode Numerice din anul 2017.
+
+   Autor
+   -----
+
+      Student Teodor-Constantin POPESCU, 313CB
+      Contact: teodor.popescu0710@stud.acs.upb.ro
+
+
+   Cum functioneaza?
+   -----------------
+
+       Exercitiul 1 - schimbarea intre doua baze aleatorii <= 30
+       Implementarea a fost facuta folosind operatii pe numere mari si, teoretic,
+   abordarea ar putea functiona pe numere oricat de mari (trecand cu vederea
+   limtarile octave, hardware si complexitatea mai mare de liniara a algoritmului).
+       Trecerea din baza b1 in baza b2 se face fara a trece printr-o baza
+   intermediara. Pentru fiecare cifra a numarului in reprezentarea in baza b1
+   se fac O(n) inmultiri intre un numar mare si un intreg, unde n este numarul
+   de cifre in reprezentarea in baza b1. Apoi se executa O(1) adunari pe numere
+   mari, pentru a combina valoarea obtinuta pentru celelalte cifre si cea obtinuta
+   pentru cifra curenta. Se trece de la vector de intregi la string in functie
+   de convenienta. Fisierele aditionale create pentru acest task sunt:
+   big_number_add.m si big_number_multiply.m
+
+       Exercitiul 2 - parcurgerea in zig-zag a matricei
+       Abordarea este destul de straight-forward. Atat timp cat nu am parcurs
+   toate "casutele" din matrice parcurgem matricea fie in sus (pe diagonala
+   secundara in sus) fie in jos. Cand am ajuns la o margine se schimba diagonala
+   si sensul de parcurgere. Nu sunt create alte fisiere pentru acest task, in
+   afara de cel solicitat.
+
+       Exercitiul 3 - codul Morse
+       1. Functia morse este continuata conform exemplului de enunt;
+       2. morse_decode; Algoritmul este unul clasic de cautare intr-un arbore
+   in care se stie la orice pas ramura pe care trebuie continuata parcurgerea. 
+   Am optat pentru o implementare iterativa a algoritmului.
+       3. morse_encode; Este implementata functia morse_find care cautata
+   recursiv in toate ramurile arborelui caracterul dorit si intoarce secventa
+   de mutari care au dus la gasirea caracterului.
+       4. multiple_encode si multiple_decode; Abordarea este una straight-forward
+   apelandu-se morse_encode/morse_decode pentru orice caracter/sir de simboluri
+   morse. Rezultatele sunt combinate intr-un singur string si returnat.
+
+        Exercitiul 4 - X si O
+        Am optat pentru o interfata cu userul complet grafica (destul de tricky.
+   Octave nu este, bineinteles, cea mai buna alegere pentru o interfata grafica
+   interactiva). Interactiunile cu utilizatorul se fac exclusiv folosind
+   butoane, label-uri si messagebox-uri. AI-ul, daca il pot numi asa, joaca
+   ideal (in sensul in care nu pierde niciodata si castiga atunci cand se ajunge
+   intr-o configuratie in care exista strategie sigura de castig). Pentru prima
+   mutare este folosita o euristica: se pune in mijloc sau in colt. Acest lucru
+   are scopul de a reduce timpul de "gandire" pentru o configuratie banala/standard
+   a tablei de joc. In rest este folosit un algoritm de tip backtracking pentru
+   a testa toate posibilitatile si pentru a gasi mutarile pentru care nu se
+   pierde/se castiga cand se poate. O observatie importanta este faptul ca, daca
+   dintr-o anumita configuratie se poate castiga in mai multe feluri, calculatorul
+   nu o va alege mereu si pe cea mai scurta (tot va castiga, dar poate prefera
+   sa se mai "distreze").
+        Feature-urile din enunt sunt implementate astfel:
+        - jucatorul alege daca vrea sa joace cu X sau cu O la inceputul unei
+   partide prin intermediul unui dialogbox;
+        - introducerea mutarilor se face prin intermediul interfetei grafice,
+   dandu-se click pe casuta din grid unde se doreste facuta mutarea. Mutarea va
+   fi urmata de o mutare facuta de calculator;
+        - mutarile vor fi reflectate in permanenta de interfata grafica prin
+   intermediul careia sunt introduse si mutarile;
+        - scorul partidelor utilizator-calculator va fi afisat in permanenta in
+   partea de sus a interfetei grafice;
+        - utilizatorul poate inchide programul folosind clasicul "X" din coltul
+   ferestrei (dupa inchiderea eventualelor ferestre de dialog). Adaugarea unei
+   alte metode de exit ar fi redundanta si bad design.
+
